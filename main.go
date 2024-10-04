@@ -1,20 +1,14 @@
 package main
-
-import (
-	"todolist/config"
-	"todolist/controllers"
-
+import(
 	"github.com/gin-gonic/gin"
 )
 
 func main() {
-	config.InitDB()
-	defer config.DB.Close()
-
 	r := gin.Default()
-
-	r.GET("/todos", controllers.GetTodos)
-	r.POST("/todos", controllers.CreateTodo)
-	
-	r.Run(":8080")
+	r.GET("/ping", func(c *gin.Context) {
+		c.JSON(200, gin.H{
+			"message": "pong",
+		})
+	})
+	r.Run()
 }
